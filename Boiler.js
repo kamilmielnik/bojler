@@ -2,15 +2,15 @@ const fs = require("fs");
 const path = require("path");
 const mkdirp = require("mkdirp");
 
-const boil = (rootPath, templates) => {
-  const boiler = new Boiler(rootPath, templates);
-  boiler.boil(true);
+const boil = (rootPath, getTemplates) => {
+  const boiler = new Boiler(rootPath, getTemplates);
+  boiler.boil();
 };
 
 class Boiler {
-  constructor(rootPath, templates) {
+  constructor(rootPath, getTemplates) {
     this.rootPath = rootPath;
-    this.templates = templates;
+    this.getTemplates = getTemplates;
   }
 
   get componentName() {
@@ -19,35 +19,31 @@ class Boiler {
     return componentName;
   }
 
-  boil(dry) {
-    if (dry) {
-      console.log(`Directory created: ${this.rootPath}`);
-    } else {
-      this.createRootDirectory();
-    }
-
-    for (const renderTemplate of this.templates) {
-      const { filename, template } = renderTemplate({
-        componentName: this.componentName,
-      });
-      const filepath = path.join(this.rootPath, filename);
-
-      if (!fs.existsSync(filepath)) {
-        if (dry) {
-          console.log(`File created: ${filepath}`);
-
-          if (template) {
-            console.log(template);
-          }
-        } else {
-          fs.writeFileSync(filepath, template);
-        }
-      }
-    }
+  boil() {
+    this.createRootDirectory();
+    this.renderTemplates();
   }
 
   createRootDirectory() {
-    mkdirp(this.rootPath);
+    mkdirp.sync(this.rootPath);
+  }
+
+  renderTemplates() {
+    const templates = this.getTemplates({
+      componentName: this.componentName,
+    });
+
+    for (const [filename, renderTemplate] of Object.entries(templates)) {
+      const filepath = path.join(this.rootPath, filename);
+      const template = renderTemplate({
+        componentName: this.componentName,
+        template: fs.existsSync(filepath)
+          ? fs.readFileSync(filepath, "utf-8")
+          : "",
+      });
+
+      fs.writeFileSync(filepath, template);
+    }
   }
 }
 

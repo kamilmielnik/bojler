@@ -20,17 +20,10 @@ if (typeof rootPath !== "string") {
   throw new Error("Usage: node boil.js [path]");
 }
 
-boil(path.join(process.cwd(), rootPath), [
-  ({ componentName }) => ({
-    filename: "index.ts",
-    template: `export { default } from './${componentName}';\n`,
-  }),
-  ({ componentName }) => ({
-    filename: `${componentName}.tsx`,
-    template: "",
-  }),
-  ({ componentName }) => ({
-    filename: `${componentName}.scss`,
-    template: "",
-  }),
-]);
+boil(path.join(process.cwd(), rootPath), ({ componentName }) => ({
+  "index.ts": ({ template }) => {
+    return template || `export { default } from './${componentName}';\n`;
+  },
+  [`${componentName}.scss`]: ({ template }) => template,
+  [`${componentName}.tsx`]: ({ template }) => template,
+}));
