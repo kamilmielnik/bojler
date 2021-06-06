@@ -15,7 +15,7 @@ const path = require("path");
 const { boil } = require("./Boiler");
 
 const BOIL_DIRECTORY = path.resolve(os.homedir(), ".boil");
-const DEFAULT_PROJECT = "prezly";
+const defaultConig = require(path.join(BOIL_DIRECTORY, "prezly.js"));
 
 const argv = Array.from(process.argv);
 const args = argv.slice(2);
@@ -25,16 +25,25 @@ if (typeof argRootPath !== "string") {
   throw new Error("Usage: node boil.js [path]");
 }
 
-const rootPath = path.isAbsolute(argRootPath)
-  ? argRootPath
-  : path.join(process.cwd(), argRootPath);
-const configFilenames = fs.readdirSync(BOIL_DIRECTORY);
-const configs = configFilenames.map((configFilename) => {
-  const configFilepath = path.join(BOIL_DIRECTORY, configFilename);
-  return require(configFilepath);
-});
-const config = configs.find((project) => {
-  return rootPath.includes(project.PROJECT_PATH);
-});
+const rootPath = resolvePath(argRootPath);
+const config = getConfig(rootPath);
 
 boil(rootPath, config);
+
+function resolvePath(filepath) {
+  return path.isAbsolute(filepath)
+    ? filepath
+    : path.join(process.cwd(), filepath);
+}
+
+function getConfig(rootPath) {
+  const configFilenames = fs.readdirSync(BOIL_DIRECTORY);
+  const configs = configFilenames.map((configFilename) => {
+    const configFilepath = path.join(BOIL_DIRECTORY, configFilename);
+    return require(configFilepath);
+  });
+  const config = configs.find((project) => {
+    return rootPath.includes(project.PROJECT_PATH);
+  });
+  return config || defaultConig;
+}
