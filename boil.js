@@ -9,21 +9,24 @@
  * It will add Dropdown.scss import to /resources/stylesheets/style.scss
  */
 
+const os = require("os");
 const path = require("path");
 const { boil } = require("./Boiler");
 
 const argv = Array.from(process.argv);
 const args = argv.slice(2);
-const [rootPath] = args;
+const [argRootPath] = args;
 
-if (typeof rootPath !== "string") {
+if (typeof argRootPath !== "string") {
   throw new Error("Usage: node boil.js [path]");
 }
 
-boil(path.join(process.cwd(), rootPath), ({ componentName }) => ({
-  "index.ts": ({ template }) => {
-    return template || `export { default } from './${componentName}';\n`;
-  },
-  [`${componentName}.scss`]: ({ template }) => template,
-  [`${componentName}.tsx`]: ({ template }) => template,
-}));
+const BOIL_DIRECTORY = path.resolve(os.homedir(), ".boil");
+
+const configFilepath = path.join(BOIL_DIRECTORY, "prezly.js");
+const config = require(configFilepath);
+const rootPath = path.isAbsolute(argRootPath)
+  ? argRootPath
+  : path.join(process.cwd(), argRootPath);
+
+boil(rootPath, config);
