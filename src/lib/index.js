@@ -2,7 +2,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-const BOIL_DIRECTORY = path.resolve(os.homedir(), '.boil');
+const BOIL_DIRECTORY = path.resolve(os.homedir(), '.bojler');
 
 const resolvePath = (filepath) => {
   return path.isAbsolute(filepath) ? filepath : path.join(process.cwd(), filepath);
