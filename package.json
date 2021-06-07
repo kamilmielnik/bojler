@@ -1,14 +1,35 @@
 {
-  "name": "boil",
+  "name": "bojler",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "Boil your plate up",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=12.4.0"
   },
-  "author": "",
-  "license": "ISC",
+  "bin": {
+    "bojler": "./bin/bojler.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamilmielnik/bojler.git"
+  },
+  "author": {
+    "name": "Kamil Mielnik",
+    "email": "kamil.adam.mielnik@gmail.com",
+    "url": "https://kamilmielnik.com/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kamilmielnik/bojler/issues"
+  },
+  "scripts": {
+    "prettier": "prettier --list-different './src/**/*.{js,jsx,ts,tsx}'",
+    "prettier:fix": "npm run prettier:js -- --write --no-list-different"
+  },
   "dependencies": {
     "mkdirp": "^1.0.4"
+  },
+  "devDependencies": {
+    "prettier": "^2.3.1"
   }
 }
