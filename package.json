@@ -1,7 +1,7 @@
 {
   "name": "bojler",
   "version": "0.0.1",
-  "description": "Boil your plate up",
+  "description": "Quickly generate boilerplate files for your projects",
   "main": "src/index.js",
   "engines": {
     "node": ">=12.4.0"
