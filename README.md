@@ -2,7 +2,13 @@
 
 Quickly generate boilerplate files for your projects.
 
-## Usage
+## Setup
+
+1. Clone this repo
+2. `npm install`
+3. Create an alias for the bin file in your shell `alias bojler='node /home/kamil/projects/bojler/bin/bojler.js'`
+
+## Project setup
 
 1. Create a configuration file for your project in `~/.bojler`, e.g. `~/.bojler/todomvc.js`.
 
@@ -40,4 +46,10 @@ module.exports = ({ componentName, rootPath }) => ({
 });
 +
 +module.exports.PROJECT_PATH = PROJECT_PATH;
+```
+
+## Usage
+
+```Shell
+boiler components/MyComponent
 ```
