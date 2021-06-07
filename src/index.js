@@ -1,10 +1,10 @@
-import boil from './boil';
-import Boiler from './Boiler';
-import { getConfig, resolvePath } from './lib';
+const boil = require('./boil');
+const Boiler = require('./Boiler');
+const { readProjectConfig, resolvePath } = require('./lib');
 
 module.exports = {
   boil,
   Boiler,
-  getConfig,
+  readProjectConfig,
   resolvePath
 };
