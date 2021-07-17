@@ -14,9 +14,19 @@ const readProjectConfig = (rootPath) => {
     const configFilepath = path.join(BOIL_DIRECTORY, configFilename);
     return require(configFilepath);
   });
-  return configs.find((project) => {
+  const config = configs.find((project) => {
     return rootPath.includes(project.PROJECT_PATH);
   });
+
+  if (config) {
+    return config;
+  }
+
+  const defaultConfig = configs.find((project) => {
+    return typeof project.PROJECT_PATH === 'undefined';
+  });
+
+  return defaultConfig;
 };
 
 module.exports = {
