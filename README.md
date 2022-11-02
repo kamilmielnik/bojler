@@ -6,29 +6,19 @@ This tool powers [Bojler VSCode Extension](https://github.com/kamilmielnik/bojle
 
 ## Installation
 
+You can skip this step if you're using [Bojler VSCode Extension](https://github.com/kamilmielnik/bojler-vscode).
+
 ```
 npm install bojler -g
 ```
 
 ## Setup
 
-1. Create template files in `~/.bojler`, e.g. `~/.bojler/react-component.js`.
-
-2. Add file templates to it:
-
-```tsx
-module.exports = ({ name }) => ({
-  'index.ts': ({ content }) => {
-    return content || `export { default } from './${name}';\n`;
-  },
-
-  [`${name}.scss`]: ({ content }) => content,
-
-  [`${name}.tsx`]: ({ content }) => content
-});
-```
+Create template files in `~/.bojler`. Examples: https://github.com/kamilmielnik/dev-settings/tree/master/.bojler
 
 ## Usage
+
+It is recommended to use [Bojler VSCode Extension](https://github.com/kamilmielnik/bojler-vscode), but a CLI is also available.
 
 ```Shell
 # bojler <template> <path>
