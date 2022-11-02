@@ -1,21 +1,19 @@
 #!/usr/bin/env node
 
-const path = require('path');
-const { boil, readProjectConfig, resolvePath } = require('../src');
+const { boil, resolvePath } = require('../src');
 
 const argv = Array.from(process.argv);
 const args = argv.slice(2);
-const [argRootPath] = args;
+const [argTemplate, argFolderPath] = args;
 
-if (typeof argRootPath !== 'string') {
-  throw new Error('Usage: node boil.js [path]');
+const USAGE = 'Usage: node boil.js [template] [path]';
+
+if (typeof argTemplate !== 'string') {
+  throw new Error(USAGE);
 }
 
-const rootPath = resolvePath(argRootPath);
-const config = readProjectConfig(rootPath);
-
-if (!config) {
-  throw new Error(`No project found for "${rootPath}"`);
+if (typeof argFolderPath !== 'string') {
+  throw new Error(USAGE);
 }
 
-boil(rootPath, config);
+boil(argTemplate, resolvePath(argFolderPath));

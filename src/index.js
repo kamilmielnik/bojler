@@ -1,10 +1,11 @@
 const boil = require('./boil');
-const Boiler = require('./Boiler');
-const { readProjectConfig, resolvePath } = require('./lib');
+const { BOILER_DIRECTORY } = require('./constants');
+const getTemplates = require('./getTemplates');
+const resolvePath = require('./resolvePath');
 
 module.exports = {
   boil,
-  Boiler,
-  readProjectConfig,
+  BOILER_DIRECTORY,
+  getTemplates,
   resolvePath
 };
