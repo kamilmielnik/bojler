@@ -5,7 +5,7 @@ const path = require('path');
 const { BOILER_DIRECTORY } = require('./constants');
 
 const boil = async (template, folderPath) => {
-  mkdirp.sync(folderPath);
+  await mkdirp(folderPath);
 
   const prepareTemplates = require(path.resolve(BOILER_DIRECTORY, template));
   const names = folderPath.split(path.sep);
