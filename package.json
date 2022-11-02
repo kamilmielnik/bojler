@@ -24,7 +24,7 @@
   },
   "scripts": {
     "prettier": "prettier --list-different './src/**/*.{js,jsx,ts,tsx}'",
-    "prettier:fix": "npm run prettier:js -- --write --no-list-different",
+    "prettier:fix": "npm run prettier -- --write --no-list-different",
     "release": "np --no-tests"
   },
   "dependencies": {
