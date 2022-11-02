@@ -4,6 +4,10 @@ Quickly generate boilerplate files for your projects.
 
 This tool powers [Bojler VSCode Extension](https://github.com/kamilmielnik/bojler-vscode).
 
+## Setup
+
+Create template files in `~/.bojler`. Examples: https://github.com/kamilmielnik/dev-settings/tree/master/.bojler
+
 ## Installation
 
 You can skip this step if you're using [Bojler VSCode Extension](https://github.com/kamilmielnik/bojler-vscode).
@@ -11,10 +15,6 @@ You can skip this step if you're using [Bojler VSCode Extension](https://github.
 ```
 npm install bojler -g
 ```
-
-## Setup
-
-Create template files in `~/.bojler`. Examples: https://github.com/kamilmielnik/dev-settings/tree/master/.bojler
 
 ## Usage
 
