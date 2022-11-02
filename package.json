@@ -1,6 +1,6 @@
 {
   "name": "bojler",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Quickly generate boilerplate files for your projects",
   "main": "src/index.js",
   "engines": {
