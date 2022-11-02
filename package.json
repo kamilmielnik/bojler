@@ -24,12 +24,14 @@
   },
   "scripts": {
     "prettier": "prettier --list-different './src/**/*.{js,jsx,ts,tsx}'",
-    "prettier:fix": "npm run prettier:js -- --write --no-list-different"
+    "prettier:fix": "npm run prettier:js -- --write --no-list-different",
+    "release": "np --no-tests"
   },
   "dependencies": {
     "mkdirp": "^1.0.4"
   },
   "devDependencies": {
+    "np": "^7.6.2",
     "prettier": "^2.7.1"
   }
 }
