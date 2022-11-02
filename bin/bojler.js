@@ -6,7 +6,7 @@ const argv = Array.from(process.argv);
 const args = argv.slice(2);
 const [argTemplate, argFolderPath] = args;
 
-const USAGE = 'Usage: node boil.js [template] [path]';
+const USAGE = 'Usage: bojler <template> <path>';
 
 if (typeof argTemplate !== 'string') {
   throw new Error(USAGE);

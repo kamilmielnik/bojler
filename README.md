@@ -2,54 +2,35 @@
 
 Quickly generate boilerplate files for your projects.
 
-## Setup
+This tool powers [Bojler VSCode Extension](https://github.com/kamilmielnik/bojler-vscode).
 
-1. Clone this repo
-2. `npm install`
-3. Create an alias for the bin file in your shell `alias bojler='node /home/kamil/projects/bojler/bin/bojler.js'`
+## Installation
 
-## Project setup
-
-1. Create a configuration file for your project in `~/.bojler`, e.g. `~/.bojler/todomvc.js`.
-
-2. Add some templates to it:
-
-```tsx
-const path = require('path');
-
-module.exports = ({ componentName, rootPath }) => ({
-  'index.ts': ({ template }) => {
-    return template || `export { default } from './${componentName}';\n`;
-  },
-
-  [`${componentName}.scss`]: ({ template }) => template,
-
-  [`${componentName}.tsx`]: ({ template }) => template
-});
+```
+npm install bojler -g
 ```
 
-3. Make sure to define `PROJECT_PATH`:
+## Setup
+
+1. Create template files in `~/.bojler`, e.g. `~/.bojler/react-component.js`.
+
+2. Add file templates to it:
 
 ```tsx
-const path = require('path');
-
-+const PROJECT_PATH = path.resolve('/home/kamil/projects/todomvc');
-
-module.exports = ({ componentName, rootPath }) => ({
-  'index.ts': ({ template }) => {
-    return template || `export { default } from './${componentName}';\n`;
+module.exports = ({ name }) => ({
+  'index.ts': ({ content }) => {
+    return content || `export { default } from './${name}';\n`;
   },
 
-  [`${componentName}.scss`]: ({ template }) => template,
+  [`${name}.scss`]: ({ content }) => content,
 
-  [`${componentName}.tsx`]: ({ template }) => template
+  [`${name}.tsx`]: ({ content }) => content
 });
-+
-+module.exports.PROJECT_PATH = PROJECT_PATH;
 ```
 
 ## Usage
 
 ```Shell
-boiler components/MyComponent
+# bojler <template> <path>
+bojler react-component components/MyComponent
 ```
