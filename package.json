@@ -38,6 +38,9 @@
   "files": [
     "build/**"
   ],
+  "np": {
+    "yarn": false
+  },
   "scripts": {
     "build": "parcel build",
     "clean": "rimraf build",
