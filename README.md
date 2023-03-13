@@ -21,6 +21,6 @@ npm install bojler -g
 It is recommended to use [Bojler VSCode Extension](https://github.com/kamilmielnik/bojler-vscode), but a CLI is also available.
 
 ```Shell
-# bojler <template> <path>
-bojler react-component components/MyComponent
+# bojler <template-filename> <context-path> [parameters-json]
+bojler react-component ./components '{"name": "MyComponent"}'
 ```

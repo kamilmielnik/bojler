@@ -1,19 +1,19 @@
 #!/usr/bin/env node
 
-const { boil, resolvePath } = require('../src');
+const { boil, resolvePath } = require('../build');
 
 const argv = Array.from(process.argv);
 const args = argv.slice(2);
-const [argTemplate, argFolderPath] = args;
+const [argTemplateFilename, argContextPath, argParameters = '{}'] = args;
 
 const USAGE = 'Usage: bojler <template> <path>';
 
-if (typeof argTemplate !== 'string') {
+if (typeof argTemplateFilename !== 'string') {
   throw new Error(USAGE);
 }
 
-if (typeof argFolderPath !== 'string') {
+if (typeof argContextPath !== 'string') {
   throw new Error(USAGE);
 }
 
-boil(argTemplate, resolvePath(argFolderPath));
+boil(argTemplateFilename, resolvePath(argContextPath), JSON.parse(argParameters));

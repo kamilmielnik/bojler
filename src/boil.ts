@@ -1,26 +1,16 @@
-import fs from 'fs';
-import mkdirp from 'mkdirp';
-import path from 'path';
+import readTemplate from './readTemplate';
+import renderTemplateTree from './renderTemplateTree';
+import resolvePath from './resolvePath';
+import { ParametersValues } from './types';
 
-import { BOILER_DIRECTORY } from './constants';
-import { Template } from './types';
-
-const boil = async (templateFilename: string, contextPath: string) => {
-  await mkdirp(contextPath);
-
-  const template: Template = require(path.resolve(BOILER_DIRECTORY, templateFilename));
-  // TODO: isPrepareTemplates
-  const names = contextPath.split(path.sep);
-  const name = names[names.length - 1];
-  const templates = template({ name });
-
-  for (const [filename, renderTemplate] of Object.entries(templates)) {
-    const filepath = path.isAbsolute(filename) ? filename : path.join(contextPath, filename);
-    const content = fs.existsSync(filepath) ? await fs.promises.readFile(filepath, 'utf-8') : '';
-    const output = await renderTemplate({ content });
-    await fs.promises.writeFile(filepath, output);
-  }
+const boil = async (
+  templateFilename: string,
+  contextPath: string,
+  parameters: ParametersValues = {}
+) => {
+  const template = readTemplate(templateFilename);
+  const tree = template.render(parameters);
+  await renderTemplateTree(tree, resolvePath(contextPath));
 };
 
 export default boil;
-
