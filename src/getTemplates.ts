@@ -1,11 +1,11 @@
-const fs = require('fs');
+import fs from 'fs';
 
-const { BOILER_DIRECTORY } = require('./constants');
+import { BOILER_DIRECTORY } from './constants';
 
-const getTemplates = async () => {
+const getTemplates = async (): Promise<string[]> => {
   const files = await fs.promises.readdir(BOILER_DIRECTORY);
   const templates = files.map((file) => file.replace(/\.js$/, ''));
   return templates;
 };
 
-module.exports = getTemplates;
+export default getTemplates;
