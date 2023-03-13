@@ -34,6 +34,10 @@
   "bugs": {
     "url": "https://github.com/kamilmielnik/bojler/issues"
   },
+  "homepage": "https://github.com/kamilmielnik/bojler#readme",
+  "files": [
+    "build/**"
+  ],
   "scripts": {
     "build": "parcel build",
     "clean": "rimraf build",
